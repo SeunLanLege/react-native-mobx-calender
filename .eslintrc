@@ -1,5 +1,23 @@
 {
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+        "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": false
+  },
+  "ecmaFeatures": {
+    "modules": true
+  },
   "extends": [
     "plugin:react-app/recommended"
-  ]
+  ],
+  "rules": {
+    "experimentalDecorators":0
+  }
 }
