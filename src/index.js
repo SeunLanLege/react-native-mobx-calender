@@ -19,8 +19,13 @@ export default class Calender extends PureComponent {
     setSelected: false,
   }
 
+  static week = {
+    view: store.week,
+  } 
+
   static toggle () {
     store.toggle()
+    this.week.view = store.week
   }
 
   static toggleMonthPicker() {
@@ -70,7 +75,6 @@ export default class Calender extends PureComponent {
 
   renderWeeks = () => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-    console.log(store.selectedDay)
     const selectedView = (string) => { if(moment(string).isSame(store.selectedDay)) return s.activeCalender; return null }
     const invalidMonth = (bool) => { if(!bool) return s.disabledMonth; return null }
     const week = chunk(store.currentMonth, 7)

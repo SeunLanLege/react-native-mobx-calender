@@ -1,6 +1,6 @@
 {
   "name": "react-native-mobx-calender",
-  "version": "1.0.0",
+  "version": "1.3.4",
   "description": "Simple Collapsible Calendar Component for React Native",
   "main": "index.js",
   "repository": {
