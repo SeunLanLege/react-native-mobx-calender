@@ -7,6 +7,7 @@
 		"test": "jest"
 	},
 	"dependencies": {
+		"babel-preset-react-native-stage-0": "^1.0.1",
 		"lodash": "^4.17.4",
 		"mobx": "^3.1.4",
 		"mobx-persist": "^0.3.0",
@@ -14,13 +15,11 @@
 		"moment": "^2.17.1",
 		"react": "~15.4.1",
 		"react-native": "0.42.0",
-		"react-native-mobx-calender": "^0.0.4",
+		"react-native-mobx-calender": "^1.5.3",
 		"uuid": "^3.0.1"
 	},
 	"devDependencies": {
 		"babel-jest": "19.0.0",
-		"babel-plugin-transform-decorators": "^6.13.0",
-		"babel-plugin-transform-decorators-legacy": "^1.3.4",
 		"babel-preset-react-native": "1.9.1",
 		"jest": "19.0.2",
 		"react-test-renderer": "~15.4.1"

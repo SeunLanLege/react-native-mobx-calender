@@ -37,7 +37,7 @@ class Month {
   @persist @observable monthPicker = false
 
   constructor() {
-    this.populateMonth()
+    if(!this.currentMonth) this.populateMonth()
   }
 
   @action toggle() {
@@ -50,13 +50,13 @@ class Month {
 
   pickNewMonth(month, callback = false) {
     const newMonth = moment(this.selectedDay).month(month).startOf('month').format('YYYY-MM-DD')
-    if (callback) callback(newMonth);
+    if (callback) requestAnimationFrame(() => callback(newMonth))
     this.pickMonth(newMonth)
   }
 
   @action pickMonth(month) {
     this.selectedDay = month
-    if (this.week) this.toggle()
+    if (!this.week) this.toggle()
     this.toggleMonthPicker()
     if (!this.months[moment(month).format('MMM')].length) this.populateMonth()
   }
@@ -70,7 +70,6 @@ class Month {
     let done = false
     const exists = this.months[month];
     if (!exists.length) {
-      console.log('why?')
       const final = []
       while(!done) {
         const temp = {
@@ -97,9 +96,8 @@ class Month {
     }
 
     selectDate(dateString, index, callback = false) {
-      if (callback) callback(dateString);
       this.selectDay(dateString, index)
-
+      if (callback) requestAnimationFrame(() => callback(dateString));
     }
 
   @computed get getWeekDates() {
