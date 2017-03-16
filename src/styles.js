@@ -5,6 +5,9 @@ const s = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
+  flexWrap: {
+    flexWrap: 'wrap',
+  },
   textCenter: {
     textAlign: 'center',
   },
