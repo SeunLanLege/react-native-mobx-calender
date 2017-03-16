@@ -5,6 +5,14 @@ const s = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
+  dot: {
+    height: 7,
+    width: 7,
+    borderRadius: 3.5,
+  },
+  green: {
+    color: '#50d2c2',
+  },
   flexWrap: {
     flexWrap: 'wrap',
   },
@@ -41,7 +49,6 @@ const s = StyleSheet.create({
   },
   activeCalender: {
     backgroundColor: '#fff',
-    color: '#50d2c2',
   },
   pTop: {
     paddingTop: 13,
