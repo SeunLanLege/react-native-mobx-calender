@@ -24,6 +24,11 @@ export default class Calender extends PureComponent {
     setSelected: false,
   }
 
+  constructor(props) {
+    super(props);
+    if(!store.selectedDay) store.selectDate(moment().format('YYYY-MM-DD'), this.props.setSelected)
+  }
+
   static week = {
     view: store.week,
   } 
@@ -73,7 +78,7 @@ export default class Calender extends PureComponent {
           const selectedText = moment(day.tostring).isSame(store.selectedDay) ? s.white : null
           return (<TouchableOpacity
             key={index}
-            onPress={() => store.selectDate(day.tostring, index, this.props.setSelected)}
+            onPress={() => store.selectDate(day.tostring, this.props.setSelected)}
             style={[s.flex, s.weekView,s.alignCenter, selectedView]}>
             <Text style={[s.textCenter, setPadding(7,0,3,0), selectedText]}>{day.day}</Text>
             <Text style={[s.textCenter, setPadding(3,0,3,0), selectedText]}>{day.date}</Text>

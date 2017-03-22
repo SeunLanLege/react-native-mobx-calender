@@ -86,7 +86,7 @@ class Month {
     }
   }
 
-  @action selectDay(dateString, index) {
+  @action selectDay(dateString) {
     this.selectedDay = dateString
     if (!this.week) this.toggle();
     const newMonth = moment(this.selectedDay).format('MMM')
@@ -95,8 +95,8 @@ class Month {
       }
     }
 
-    selectDate(dateString, index, callback = false) {
-      this.selectDay(dateString, index)
+    selectDate(dateString, callback = false) {
+      this.selectDay(dateString)
       if (callback) requestAnimationFrame(() => callback(dateString));
     }
 
