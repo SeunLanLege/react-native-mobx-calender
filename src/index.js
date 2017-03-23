@@ -99,7 +99,7 @@ export default class Calender extends PureComponent {
       return (
       <TouchableOpacity
         key={index}
-        onPress={() => store.selectDate(day.tostring, index, this.props.setSelected)}
+        onPress={() => store.selectDate(day.tostring, this.props.setSelected)}
         style={[s.p,selectedView, { width, height }]}>
             <Text style={[s.textCenter, !sameDay ? s.white : s.green, setPadding(0,0,7,0), invalidMonth]}>{day.date}</Text>
             { indexOf(events, day.tostring) === -1 ? null : <View style={[{ height: 15 }, s.alignCenter]}><View style={[s.dot, !sameDay ? s.backWhite :s.calenderView ]} /></View> }
