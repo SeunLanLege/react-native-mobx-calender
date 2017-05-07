@@ -18,10 +18,12 @@ export default class Calender extends PureComponent {
   static propTypes = {
     setSelected: PropTypes.func,
     events: PropTypes.array,
+		color: PropTypes.string,
   }
 
   static defaultProps = {
     setSelected: false,
+		color: '#50d2c2'
   }
 
   constructor(props) {
@@ -54,10 +56,11 @@ export default class Calender extends PureComponent {
   }
 
   renderMonthPicker = () => {
+		const { color } = this.props
     const monthArray = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
     const grid = chunk(monthArray, 3)
     const selectedMonth = moment(store.selectedDay).format('MMM');
-    const active = (month) => { if (month === selectedMonth) return s.activeMonth; return null; }
+    const active = (month) => { if (month === selectedMonth) return { backgroundColor: color, borderRadius: 5 } ; return null; }
     return grid.map((month, i) => (
       <View key={i} style={s.row}>
         {month.map((monthName, i) => (
@@ -70,11 +73,11 @@ export default class Calender extends PureComponent {
   }
 
   renderWeek = () => {
-    const { events } = this.props || [];
+    const { events, color } = this.props || [];
     return (
       <View style={[s.row]}>
         {store.getWeekDates.map((day, index) => {
-          const selectedView = moment(day.tostring).isSame(store.selectedDay) ? s.activeWeek : null
+          const selectedView = moment(day.tostring).isSame(store.selectedDay) ? { backgroundColor: color } : null
           const selectedText = moment(day.tostring).isSame(store.selectedDay) ? s.white : null
           return (<TouchableOpacity
             key={index}
@@ -82,7 +85,7 @@ export default class Calender extends PureComponent {
             style={[s.flex, s.weekView,s.alignCenter, selectedView]}>
             <Text style={[s.textCenter, setPadding(7,0,3,0), selectedText]}>{day.day}</Text>
             <Text style={[s.textCenter, setPadding(3,0,3,0), selectedText]}>{day.date}</Text>
-            { indexOf(events, day.tostring) === -1 ? null : <View style={[{height: 15}, s.alignCenter, s.justifyCenter]}><View style={[s.dot, selectedView ? s.backWhite : s.calenderView]} /></View> }
+            { indexOf(events, day.tostring) === -1 ? null : <View style={[{height: 15}, s.alignCenter, s.justifyCenter]}><View style={[s.dot, selectedView ? s.backWhite : { backgroundColor: color }]} /></View> }
           </TouchableOpacity>)
         })
         }
@@ -91,23 +94,23 @@ export default class Calender extends PureComponent {
 
   renderWeeks = () => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-    const { events } = this.props || [];
+    const { events, color } = this.props || [];
     const array = store.currentMonth.map((day, index) => {
       const sameDay =  moment(day.tostring).isSame(store.selectedDay)
-      const selectedView  = sameDay ? s.activeCalender : s.calenderView
+      const selectedView  = sameDay ? s.activeCalender : { backgroundColor: color }
       const invalidMonth = !day.isCurrentMonth ? s.disabledMonth : null;
       return (
       <TouchableOpacity
         key={index}
         onPress={() => store.selectDate(day.tostring, this.props.setSelected)}
         style={[s.p,selectedView, { width, height }]}>
-            <Text style={[s.textCenter, !sameDay ? s.white : s.green, setPadding(0,0,7,0), invalidMonth]}>{day.date}</Text>
-            { indexOf(events, day.tostring) === -1 ? null : <View style={[{ height: 15 }, s.alignCenter]}><View style={[s.dot, !sameDay ? s.backWhite :s.calenderView ]} /></View> }
+            <Text style={[s.textCenter, !sameDay ? s.white : { color }, setPadding(0,0,7,0), invalidMonth]}>{day.date}</Text>
+            { indexOf(events, day.tostring) === -1 ? null : <View style={[{ height: 15 }, s.alignCenter]}><View style={[s.dot, !sameDay ? s.backWhite : { backgroundColor: color }]} /></View> }
           </TouchableOpacity>)
     })
     return (
         <View>
-          <View style={[s.calenderView, s.row, setPadding(7,0,0,0)]}>{days.map((day, i) => (<View key={i} style={[s.flex]}><Text style={[s.white, s.textCenter]}>{day}</Text></View>))}</View>
+          <View style={[{ backgroundColor: color }, s.row, setPadding(7,0,0,0)]}>{days.map((day, i) => (<View key={i} style={[s.flex]}><Text style={[s.white, s.textCenter]}>{day}</Text></View>))}</View>
           <View style={[ s.flexWrap, s.row]}>{array}</View>
         </View>);
   }
